@@ -1,0 +1,12 @@
+.container {
+  padding-top: 70px;
+}
+
+.content {
+  padding: 20px 50px;
+  background-color: #eab543;
+  min-height: calc(100vh - 170px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

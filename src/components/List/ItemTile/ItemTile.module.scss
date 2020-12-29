@@ -1,0 +1,20 @@
+.drinkName {
+  transform: rotate(-90deg) translateY(50%);
+  position: absolute;
+  bottom: 0;
+  text-transform: uppercase;
+  color: #f8efba;
+  transform-origin: left;
+  font-family: cursive;
+  left: 10px;
+  max-width: 200px;
+}
+
+.itemTile {
+  position: relative;
+  padding: 10px 10px 10px 60px;
+  border-radius: 5px;
+  border: 3px solid #f8efba;
+  overflow: hidden;
+  margin-bottom: 20px;
+}

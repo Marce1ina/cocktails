@@ -1,11 +1,34 @@
-import * as React from "react";
+import React from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { IState } from "../interface";
+import Layout from "./Layout/Layout";
+import Main from "./Main/Main";
+import List from "./List/List";
+import Item from "./Item/Item";
+import { Switch, Route } from "react-router-dom";
 
-export interface HelloWorldProps {
-  userName: string;
-  lang: string;
-}
-export const App = (props: HelloWorldProps) => (
-  <h1>
-    Hi {props.userName} from React! Welcome to {props.lang}!
-  </h1>
+const mapState = (store: IState) => ({});
+
+const connector = connect(mapState);
+
+type IPropsFromRedux = ConnectedProps<typeof connector>;
+
+interface HelloWorldProps extends IPropsFromRedux {}
+
+const App: React.FC<HelloWorldProps> = () => (
+  <Layout>
+    <Switch>
+      <Route path="/list">
+        <List />
+      </Route>
+      <Route path="/drink">
+        <Item />
+      </Route>
+      <Route path="/">
+        <Main />
+      </Route>
+    </Switch>
+  </Layout>
 );
+
+export default connector(App);

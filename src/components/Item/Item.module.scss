@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 0 120px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:first-of-type {
+    flex-basis: 60%;
+    margin-right: 35px;
+  }
+}
+
+.title {
+  font-family: cursive;
+}
+
+.image {
+  border: 3px dotted #f8efba;
+  margin-bottom: 35px;
+}
+
+.withMargin {
+  display: block;
+  margin-bottom: 10px;
+}
