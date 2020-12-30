@@ -1,31 +1,75 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Item.module.scss";
 import { useLocation } from "react-router-dom";
-import itemMock from "../../api/itemMock.json";
+import {
+  getById,
+  getRandom,
+  resetState,
+  setLoading,
+} from "../../redux/actions";
+import { connect, ConnectedProps } from "react-redux";
+import { IState } from "../../interface";
 
-const drink = itemMock.drinks[0];
+const mapState = (state: IState) => ({
+  item: state.item,
+  loading: state.loading,
+});
+
+const mapDispatch = { getById, getRandom, resetState, setLoading };
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends PropsFromRedux {}
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const Item = () => {
+const Item: React.FC<Props> = ({
+  getById,
+  getRandom,
+  resetState,
+  setLoading,
+  item: drink,
+  loading,
+}) => {
   const query = useQuery();
+  const queryId = query ? query.get("id") : null;
 
-  // Jak nie ma id to pobrac random
+  useEffect(() => {
+    setLoading();
 
-  return (
+    const getItem = async () => {
+      if (queryId) {
+        await getById(queryId);
+      } else {
+        await getRandom();
+      }
+    };
+
+    getItem();
+
+    return resetState;
+  }, []);
+
+  return loading ? (
+    <p>Loading...</p>
+  ) : (
     <div className={style.container}>
       <div className={style.column}>
         <h1 className={style.title}>{drink.strDrink}</h1>
-        <p className={style.ingredients}>
+        <div className={style.ingredients}>
           <b className={style.withMargin}>Ingredients:</b>
-          <ul>
-            <li>{drink.strIngredient1}</li>
-            <li>{drink.strIngredient2}</li>
-            <li>{drink.strIngredient3}</li>
+          <ul className={style.withMargin}>
+            {Object.entries(drink).map(([key, value]) => {
+              if (key.startsWith("strIngredient") && value) {
+                return <li key={key}>{value}</li>;
+              }
+            })}
           </ul>
-        </p>
+        </div>
 
         <p className={style.description}>
           <b className={style.withMargin}>Preparation:</b>
@@ -42,13 +86,15 @@ const Item = () => {
           <b>Category: </b>
           {drink.strCategory}
         </p>
-        <p>
-          <b>IBA: </b>
-          {drink.strIBA}
-        </p>
+        {drink.strIBA && (
+          <p>
+            <b>IBA: </b>
+            {drink.strIBA}
+          </p>
+        )}
       </div>
     </div>
   );
 };
 
-export default Item;
+export default connector(Item);

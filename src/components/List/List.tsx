@@ -10,7 +10,7 @@ import {
   setLoading,
 } from "../../redux/actions";
 
-const mapState = (state: IState): IState => ({
+const mapState = (state: IState) => ({
   list: state.list,
   filter: state.filter,
   loading: state.loading,

@@ -1,6 +1,7 @@
 import { IAction, IState } from "../interface";
 import {
   GET_ALCOHOLIC,
+  GET_DRINK,
   GET_NON_ALCOHOLIC,
   RESET_FILTER,
   RESET_LIST,
@@ -12,6 +13,7 @@ import {
 const initialState: IState = {
   list: [],
   filter: {},
+  item: {},
 };
 
 export const reducer = (
@@ -33,10 +35,13 @@ export const reducer = (
       return { ...state, list: [] };
     }
     case RESET_STATE: {
-      return { list: [], filter: {} };
+      return { list: [], filter: {}, item: {} };
     }
     case SET_LOADING: {
       return { ...state, loading: true };
+    }
+    case GET_DRINK: {
+      return { ...state, item: action.payload.data.drinks[0], loading: false };
     }
     default:
       return state;

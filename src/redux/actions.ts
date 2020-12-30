@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Dispatch, IList, IFilter } from "../interface";
+import { Dispatch, IList, IFilter, IDrinkDetails } from "../interface";
 
 export const GET_NON_ALCOHOLIC = "GET_NON_ALCOHOLIC";
 export const GET_ALCOHOLIC = "GET_ALCOHOLIC";
@@ -8,6 +8,7 @@ export const RESET_FILTER = "RESET_FILTER";
 export const RESET_LIST = "RESET_LIST";
 export const RESET_STATE = "RESET_STATE";
 export const SET_LOADING = "SET_LOADING";
+export const GET_DRINK = "GET_DRINK";
 
 export const getNonAlcoholic = () => (dispatch: Dispatch) =>
   axios
@@ -39,3 +40,18 @@ export const resetState = () => (dispatch: Dispatch) =>
 
 export const setLoading = () => (dispatch: Dispatch) =>
   dispatch({ type: SET_LOADING });
+
+const getDrink = (payload: AxiosResponse<IDrinkDetails>) => ({
+  type: GET_DRINK,
+  payload,
+});
+
+export const getById = (id: string) => (dispatch: Dispatch) =>
+  axios
+    .get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then((resp: AxiosResponse<IDrinkDetails>) => dispatch(getDrink(resp)));
+
+export const getRandom = () => (dispatch: Dispatch) =>
+  axios
+    .get("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+    .then((resp: AxiosResponse<IDrinkDetails>) => dispatch(getDrink(resp)));

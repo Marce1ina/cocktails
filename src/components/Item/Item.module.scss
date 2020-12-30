@@ -17,6 +17,7 @@
 }
 
 .title {
+  @extend .withMargin;
   font-family: cursive;
 }
 
