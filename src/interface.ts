@@ -1,6 +1,7 @@
 export interface IState {
-  list: object[];
-  filters: object[];
+  list: IDrink[];
+  filter: IFilter;
+  loading?: boolean;
 }
 export interface IAction {
   type: string;
@@ -12,4 +13,12 @@ export interface IDrink {
   strDrink: string;
   strDrinkThumb: string;
   idDrink: string;
+}
+
+export interface IFilter {
+  alcoholic?: boolean;
+}
+
+export interface IList {
+  drinks: IDrink[];
 }

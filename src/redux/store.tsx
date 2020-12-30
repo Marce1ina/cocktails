@@ -1,19 +1,11 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import ReduxThunk from "redux-thunk";
+import { reducer } from "./reducer";
 
-import { IState, IAction } from "../interface";
-
-const initialState: IState = {
-  list: [],
-  filters: [],
-};
-
-const reducer = (state: IState = initialState, action: IAction): IState => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
-
-const Store = createStore(reducer);
+const Store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(ReduxThunk))
+);
 
 export default Store;

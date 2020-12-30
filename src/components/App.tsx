@@ -8,7 +8,6 @@ import Item from "./Item/Item";
 import { Switch, Route } from "react-router-dom";
 
 const mapState = (store: IState) => ({});
-
 const connector = connect(mapState);
 
 type IPropsFromRedux = ConnectedProps<typeof connector>;
