@@ -10,14 +10,12 @@ $tertiaryColor: #58b19f;
   background-color: #2c3a47;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   z-index: 1;
 }
 
 .logo {
   width: 50px;
-  position: absolute;
-  left: 20px;
 }
 
 .title {
@@ -25,25 +23,10 @@ $tertiaryColor: #58b19f;
   font-family: "Langar", cursive;
 }
 
-.icon {
-  position: absolute;
-  right: 30px;
-  color: $primaryColor;
-  font-size: 16px;
-  transition: 0.1s;
-  cursor: pointer;
-
-  &:hover {
-    color: $secondaryColor;
-  }
-}
-
 .randomDrinkButton {
   max-width: 70px;
   padding: 5px 8px;
   border-radius: 3px;
-  position: absolute;
-  right: 80px;
   font-family: cursive;
   text-decoration: none;
   text-align: center;

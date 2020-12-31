@@ -60,7 +60,11 @@ const List: React.FC<Props> = ({
       {loading ? (
         <p>Loading...</p>
       ) : list.length ? (
-        list.map((drink) => <ItemTile key={drink.idDrink} drink={drink} />)
+        list.map((drink) => {
+          return drink.strDrinkThumb ? (
+            <ItemTile key={drink.idDrink} drink={drink} />
+          ) : null;
+        })
       ) : (
         <p>Error fetching data from the server.</p>
       )}

@@ -15,8 +15,6 @@ const Header = () => {
       <Link to="/drink" className={style.randomDrinkButton}>
         Random drink
       </Link>
-
-      <i className={`${style.icon} icon-search`}></i>
     </div>
   );
 };
